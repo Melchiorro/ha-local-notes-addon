@@ -1,6 +1,3 @@
-name: "My Local Notes"
-description: "Local note-taking system with image support"
-panel_title: "Notes"
 configuration:
   log_level:
     name: "Log level"
