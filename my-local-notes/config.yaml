@@ -5,11 +5,9 @@ description: "Local note-taking system with image support"
 arch:
   - aarch64
   - amd64
-  - armv7
 init: false
 panel_icon: "mdi:note-multiple"
 panel_title: "Notes"
-map_data: true
 ingress: true
 ingress_port: 15026
 options:
