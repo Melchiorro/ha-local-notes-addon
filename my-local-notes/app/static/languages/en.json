@@ -1,0 +1,18 @@
+{
+    "panel_title": "Notes",
+    "create_note": "Create new note",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete_confirm": "Delete note and attached images?",
+    "edit_hint": "Edit",
+    "delete_hint": "Delete",
+    "upload_images": "Upload images",
+    "loading_error": "Error loading notes",
+    "admin_check_files": "🔍 Check Files",
+    "admin_cleanup": "🧹 Cleanup Orphans",
+    "admin_no_files": "No files found.",
+    "admin_orphans_found": "Found {count} orphaned files.",
+    "admin_confirm_delete": "Confirm Delete All",
+    "admin_delete_success": "Deleted {count} files.",
+    "modal_close": "Close"
+}

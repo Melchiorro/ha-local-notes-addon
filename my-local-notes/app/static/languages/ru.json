@@ -1,0 +1,18 @@
+{
+    "panel_title": "Заметки",
+    "create_note": "Создать новую заметку",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete_confirm": "Удалить заметку и вложенные изображения?",
+    "edit_hint": "Редактировать",
+    "delete_hint": "Удалить",
+    "upload_images": "Загрузить изображения",
+    "loading_error": "Ошибка при загрузке заметок",
+    "admin_check_files": "🔍 Проверить файлы",
+    "admin_cleanup": "🧹 Очистка сирот",
+    "admin_no_files": "Файлы не найдены.",
+    "admin_orphans_found": "Найдено лишних файлов: {count}.",
+    "admin_confirm_delete": "Подтвердить удаление всех",
+    "admin_delete_success": "Успешно удалено файлов: {count}.",
+    "modal_close": "Закрыть"
+}

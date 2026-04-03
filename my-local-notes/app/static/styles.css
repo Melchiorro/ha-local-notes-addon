@@ -1,0 +1,384 @@
+:host {
+  /* 1. DEFAULT VARIABLES (Light Theme) */
+  --primary-background-color: #fafafa;
+  --secondary-background-color: #e5e5e5;
+  --card-background-color: #ffffff;
+  --primary-text-color: #212121;
+  --secondary-text-color: #727272;
+
+  --primary-color: #03a9f4;
+  --accent-color: #ff9800;
+  --error-color: #db4437;
+  --warning-color: #ffa600;
+  --success-color: #43a047;
+
+  display: block;
+  font-family: var(--primary-font-family, Roboto, sans-serif);
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. DARK MODE SUPPORT */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --primary-background-color: #111111;
+    --secondary-background-color: #202020;
+    --card-background-color: #1c1c1c;
+    --primary-text-color: #e1e1e1;
+    --secondary-text-color: #adb5bd;
+  }
+}
+
+/* Notes Grid Layout */
+#notes-list {
+  column-count: auto;
+  column-width: 280px;
+  column-gap: 16px;
+  padding: 10px;
+}
+
+/* Create Button */
+#create-note {
+  cursor: pointer;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.2s;
+  margin-bottom: 20px;
+  box-shadow:
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+#create-note:hover {
+  background-color: var(--primary-color);
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Note Card Item */
+.note-card {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 16px;
+  background: var(--card-background-color);
+  color: var(--primary-text-color);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--divider-color, rgba(0,0,0,0.1));
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  break-inside: avoid;
+  transition: transform 0.1s ease;
+}
+
+.note-card:hover {
+  border-color: var(--primary-color);
+}
+
+.note-content {
+  cursor: pointer;
+  margin-bottom: 12px;
+  word-wrap: break-word;
+}
+
+/* Image Container Grid */
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+/* Image Preview in Editor (with remove button) */
+.preview-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.remove-img {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--error-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Note Thumbnails */
+.preview-wrapper .thumbnail,
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--divider-color, rgba(0, 0, 0, 0.1));
+  transition: transform 0.2s;
+}
+
+.image-container .thumbnail {
+    cursor: pointer;
+}
+
+.image-container .thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Card Control Buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--divider-color, rgba(0, 0, 0, 0.1));
+  padding-top: 10px;
+}
+
+.edit,
+.delete {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.delete:hover {
+  background: rgba(219, 68, 55, 0.1);
+}
+
+/* Modal Dialogs */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.modal-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 20%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-background-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.modal-content {
+  overflow: auto;
+}
+
+/* Text Editor Area */
+#note-editor {
+  width: 100%;
+  min-height: 200px;
+  box-sizing: border-box;
+  border: 1px solid var(--divider-color, #ccc);
+  background: var(--primary-background-color);
+  color: var(--primary-text-color);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* Modal Action Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+#save-note,
+#cancel-note {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#save-note {
+  background: var(--primary-color);
+  color: white;
+}
+#cancel-note {
+  background: var(--error-color);
+  color: white;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 16px;
+  background: var(--secondary-background-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#save-note:hover,
+#cancel-note:hover,
+.custom-file-upload:hover {
+  background-color: var(--accent-color);
+}
+
+/* Fullscreen Image Viewer (Zoom) */
+.zoom-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.zoom-image-wrapper {
+  position: relative;
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.zoom-image-wrapper img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 4px;
+}
+
+.modal-close,
+.zoom-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Admin Tools Panel */
+.admin-tools {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--divider-color, rgba(0,0,0,0.2));
+  display: flex;
+  gap: 10px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.admin-tools:hover {
+  opacity: 1;
+}
+
+.tool-btn {
+  background: var(--secondary-background-color);
+  color: var(--primary-text-color);
+  border: 1px solid var(--divider-color);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* Admin Modal Specifics */
+.admin-modal {
+  max-width: 80%;
+}
+
+.info-scroll-area {
+  max-height: 40vh;
+  overflow-y: auto;
+  margin: 15px 0;
+  padding-right: 5px;
+}
+
+.admin-file-list {
+  list-style: none;
+  padding: 0;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.admin-file-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--divider-color, rgba(0,0,0,0.05));
+}
+
+.modal-close-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--secondary-background-color);
+  border: none;
+  border-radius: 8px;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.delete-confirm-btn {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+@media (max-width: 652px) {
+    .modal-window {
+        min-width: 80%;
+        box-sizing: border-box;
+    }
+}

@@ -1,0 +1,10 @@
+name: "My Local Notes"
+description: "Local note-taking system with image support"
+panel_title: "Notes"
+configuration:
+  log_level:
+    name: "Log level"
+    description: "Controls the verbosity of the add-on logs"
+  show_admin_tools:
+    name: "Show admin tools"
+    description: "Enables file check and cleanup buttons in the interface"

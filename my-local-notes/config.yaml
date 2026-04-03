@@ -1,0 +1,20 @@
+name: "My local notes"
+version: "1.0.0"
+slug: "my-local-notes"
+description: "Local note-taking system with image support"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+panel_icon: "mdi:note-multiple"
+panel_title: "Notes"
+map_data: true
+ingress: true
+ingress_port: 15026
+options:
+  log_level: info
+  show_admin_tools: false
+schema:
+  log_level: list(debug|info|warning|error|fatal)
+  show_admin_tools: bool
